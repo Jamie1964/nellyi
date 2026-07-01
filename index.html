@@ -1,0 +1,171 @@
+<!-- FILENAME: index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nelly Ihsayabok — Model Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        margin:0;
+        background:#0d0d0d;
+        color:#fff;
+        font-family:Arial, sans-serif;
+    }
+
+    /* Split Banner: Text Left, Full Image Right */
+    .hero-split {
+        display: flex;
+        height: 100vh;
+        width: 100%;
+    }
+
+    .hero-left {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 60px;
+        padding-right: 40px;
+        background: #0d0d0d;
+        color: #fff;
+    }
+
+    .hero-left h1 {
+        font-size: 56px;
+        letter-spacing: 4px;
+        text-shadow: 0 0 18px rgba(255, 215, 0, 0.7); /* Soft gold glow */
+    }
+
+    .hero-left p {
+        margin-top: 10px;
+        font-size: 20px;
+        color: #f0f0f0;
+    }
+
+    .hero-right {
+        flex: 1;
+        background-image: url("./photos/banner.jpg"); /* Your full image */
+        background-size: contain;      /* Shows full image */
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-color: #000;        /* Fills any empty space */
+    }
+
+    /* Sections */
+    .section {
+        max-width: 900px;
+        margin:60px auto;
+        padding:0 20px;
+    }
+
+    .section h2 {
+        font-size:32px;
+        letter-spacing:2px;
+        margin-bottom:15px;
+    }
+
+    .section p {
+        font-size:18px;
+        line-height:1.7;
+        color:#ccc;
+    }
+
+    /* Measurements */
+    .measurements {
+        background:#1a1a1a;
+        padding:25px;
+        border-radius:10px;
+        line-height:1.8;
+        font-size:18px;
+        color:#ddd;
+    }
+
+    /* Portfolio Link */
+    .gallery-link {
+        text-align:center;
+        margin-top:40px;
+    }
+
+    .gallery-link a {
+        color:#ffd700;
+        font-size:22px;
+        text-decoration:none;
+        letter-spacing:1px;
+    }
+
+    /* Footer */
+    footer {
+        text-align:center;
+        padding:20px;
+        color:#666;
+        font-size:14px;
+        margin-top:60px;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- HERO BANNER (Split Layout) -->
+<div class="hero-split">
+    <div class="hero-left">
+        <h1>Nelly Ihsayabok</h1>
+        <p>Model • Fashion • Beauty • Editorial</p>
+    </div>
+
+    <div class="hero-right"></div>
+</div>
+
+<!-- ABOUT -->
+<div class="section">
+    <h2>About</h2>
+    <p>
+        Nelly Ihsayabok is a versatile model whose presence blends softness, elegance, and bold, expressive energy.
+        With a look that shifts effortlessly from refined glam to playful charm, she brings a dynamic range to every shoot —
+        whether she’s embodying quiet sophistication or stepping into a sassy, vibrant mood.
+        Her natural confidence in front of the camera, paired with her artistic intuition, makes her a standout collaborator
+        for fashion, beauty, lifestyle, and editorial work.
+        With several years of experience, she continues to build a portfolio that reflects her unique aesthetic —
+        warm, glamorous, edgy, cute, elegant, and unmistakably her.
+        <br><br>
+        <strong>Available for fashion, beauty, editorial, lifestyle, and creative collaborations.</strong>
+    </p>
+</div>
+
+<!-- MEASUREMENTS -->
+<div class="section">
+    <h2>Measurements</h2>
+    <div class="measurements">
+        Height: 5'1"<br>
+        Bust: 35"<br>
+        Waist: 26"<br>
+        Hips: 37"<br>
+        Shoe: 23 EU<br>
+        Hair: Black<br>
+        Eyes: Brown
+    </div>
+</div>
+
+<!-- PORTFOLIO LINK -->
+<div class="gallery-link">
+    <a href="gallery.html">View Portfolio</a>
+</div>
+
+<!-- BOOKINGS -->
+<div class="section" style="text-align:center;margin-top:60px;">
+    <h2>Bookings</h2>
+    <p>
+        For modeling inquiries or collaborations:<br>
+        <a href="mailto:nelly@nellyi.com" style="color:#ffd700;">nelly@nellyi.com</a>
+    </p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    © 2026 Nelly Ihsayabok — All Rights Reserved
+</footer>
+
+</body>
+</html>
