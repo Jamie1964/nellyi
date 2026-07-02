@@ -54,6 +54,23 @@
 <footer>
     © 2026 Nelly Ihsayabok — All Rights Reserved
 </footer>
+<div id="page-counter" style="text-align:center; margin-top:40px; font-size:14px; color:#999;">
+    Views: <span id="views"></span>
+</div>
+
+<script>
+    const pageId = window.location.pathname;
+    let count = localStorage.getItem("counter_" + pageId);
+
+    if (!count) {
+        count = 1;
+    } else {
+        count = parseInt(count) + 1;
+    }
+
+    localStorage.setItem("counter_" + pageId, count);
+    document.getElementById("views").textContent = count;
+</script>
 
 </body>
 </html>
