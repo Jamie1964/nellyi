@@ -162,34 +162,40 @@
     </p>
 </div>
 
-<!-- FOOTER -->
 <footer>
-    © 2026 Nelly Ihsayabok — All Rights Reserved
-    <div style="font-style:italic; margin-top:6px;">
-        <a href="https://jamiespages.com" style="color:#888; text-decoration:none;">
-            jamiespages.com
-        </a>
-    </div>
-</footer>
-
-
-
-<div id="page-counter" style="text-align:center; margin-top:40px; font-size:14px; color:#999;">
-    Views: <span id="views"></span>
-</div>
+<!-- The container where your footer will load -->
+<div id="universal-footer"></div>
 
 <script>
-    const pageId = window.location.pathname;
-    let count = localStorage.getItem("counter_" + pageId);
-
-    if (!count) {
-        count = 1;
-    } else {
-        count = parseInt(count) + 1;
+  async function loadFooterAndCounter() {
+    // 1. Fetch and inject the central footer HTML
+    try {
+      const response = await fetch('/footer.html');
+      const html = await response.text();
+      document.getElementById('universal-footer').innerHTML = html;
+    } catch (err) {
+      console.error('Failed to load footer base structure', err);
+      return; // Stop if footer file can't be loaded
     }
 
-    localStorage.setItem("counter_" + pageId, count);
-    document.getElementById("views").textContent = count;
+    // 2. Automatically detect page filename (e.g., 'beauty', 'fashion') for the database key
+    const pageId = window.location.pathname.split("/").pop().replace(".html", "") || "index";
+    
+    // 3. Request the live count from your worker and inject it into the loaded footer template
+    try {
+      const counterResponse = await fetch(`https://cold-boat-0687.jimkoskinas.workers.dev/?pageId=${pageId}`, {
+        method: 'POST'
+      });
+      const data = await counterResponse.json();
+      document.getElementById('page-counter').textContent = data.count;
+    } catch (err) {
+      console.error('Failed to load live view count', err);
+      document.getElementById('page-counter').textContent = '--';
+    }
+  }
+
+  // Run everything on page load
+  loadFooterAndCounter();
 </script>
 
 </body>
