@@ -74,12 +74,16 @@
     const workerUrl = "https://cold-boat-0687.jimkoskinas.workers.dev?pageId=" + encodeURIComponent(pageId);
 
     fetch(workerUrl, { method: "POST" })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) throw new Error("Status: " + response.status);
+            return response.json();
+        })
         .then(data => {
             document.getElementById("views").textContent = data.count;
         })
         .catch(error => {
-            console.error("Error updating counter:", error);
+            document.getElementById("views").textContent = "Blocked by CORS";
+            console.error("Counter Error:", error);
         });
 </script>
 </body>
