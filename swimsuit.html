@@ -59,32 +59,39 @@
     <a href="gallery.html">← Back to Portfolio</a>
 </div>
 
-<footer>
-    © 2026 Nelly Ihsayabok — All Rights Reserved
-</footer>
-
-
-
-    <div style="text-align: center; margin: 20px 0;">
-    Views: <span id="views">Loading...</span>
-</div>
+<!-- The container where your footer will load -->
+<div id="universal-footer"></div>
 
 <script>
-    const pageId = window.location.pathname;
-    const workerUrl = "https://cold-boat-0687.jimkoskinas.workers.dev?pageId=" + encodeURIComponent(pageId);
+  async function loadFooterAndCounter() {
+    // 1. Fetch and inject the central footer HTML
+    try {
+      const response = await fetch('/footer.html');
+      const html = await response.text();
+      document.getElementById('universal-footer').innerHTML = html;
+    } catch (err) {
+      console.error('Failed to load footer base structure', err);
+      return; // Stop if footer file can't be loaded
+    }
 
-    fetch(workerUrl, { method: "POST" })
-        .then(response => {
-            if (!response.ok) throw new Error("Status: " + response.status);
-            return response.json();
-        })
-        .then(data => {
-            document.getElementById("views").textContent = data.count;
-        })
-        .catch(error => {
-            document.getElementById("views").textContent = "Blocked by CORS";
-            console.error("Counter Error:", error);
-        });
+    // 2. Automatically detect page filename (e.g., 'beauty', 'fashion') for the database key
+    const pageId = window.location.pathname.split("/").pop().replace(".html", "") || "index";
+    
+    // 3. Request the live count from your worker and inject it into the loaded footer template
+    try {
+      const counterResponse = await fetch(`https://cold-boat-0687.jimkoskinas.workers.dev/?pageId=${pageId}`, {
+        method: 'POST'
+      });
+      const data = await counterResponse.json();
+      document.getElementById('page-counter').textContent = data.count;
+    } catch (err) {
+      console.error('Failed to load live view count', err);
+      document.getElementById('page-counter').textContent = '--';
+    }
+  }
+
+  // Run everything on page load
+  loadFooterAndCounter();
 </script>
 </body>
 </html>
