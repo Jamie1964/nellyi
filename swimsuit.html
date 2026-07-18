@@ -80,5 +80,24 @@
     document.getElementById("views").textContent = count;
 </script>
 
+
+
+    <div style="text-align: center; margin: 20px 0;">
+    Views: <span id="views">Loading...</span>
+</div>
+
+<script>
+    const pageId = window.location.pathname;
+    const workerUrl = "https://cold-boat-0687.jimkoskinas.workers.dev?pageId=" + encodeURIComponent(pageId);
+
+    fetch(workerUrl, { method: "POST" })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("views").textContent = data.count;
+        })
+        .catch(error => {
+            console.error("Error updating counter:", error);
+        });
+</script>
 </body>
 </html>
