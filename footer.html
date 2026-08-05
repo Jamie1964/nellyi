@@ -8,23 +8,31 @@
 <script>
 (async function() {
     try {
-        // Create a unique clean identifier based on the current page filename
         let path = window.location.pathname;
         if (path.endsWith('/')) path = path.slice(0, -1);
         let filename = path.split('/').pop();
         let pageId = filename ? filename.replace('.html', '') : 'index';
         if (!pageId) pageId = 'index';
         
-        // Use a reliable free public counter endpoint (CounterAPI)
-        const res = await fetch(`https://api.counterapi.dev/v1/nellyi_${pageId}/hits/up`, {
-            method: 'GET'
-        });
+        const namespace = 'nellyi_site';
+        const key = pageId;
+        
+        // Try to increment the hit count
+        let res = await fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`);
+        
+        // If the counter doesn't exist yet, create it first, then increment
+        if (!res.ok) {
+            await fetch(`https://api.counterapi.dev/v1/${namespace}/${key}`);
+            res = await fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`);
+        }
         
         if (res.ok) {
             const data = await res.json();
             const el = document.getElementById('view-count');
             if (el && data.count !== undefined) {
                 el.textContent = data.count;
+            } else {
+                document.getElementById('view-count').textContent = '1';
             }
         } else {
             document.getElementById('view-count').textContent = '1';
