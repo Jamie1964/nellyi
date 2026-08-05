@@ -1,4 +1,6 @@
-<!-- FILENAME: swimsuit.html -->
+<!-- DOMAIN: nellyi.com -->
+<!-- FILENAME: swimsuit2.html -->
+<!-- UPDATED: 2026-08-05 12:00 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,13 +27,6 @@
             font-size: 18px;
             color: #ccc;
             margin-top: 10px;
-        }
-        .counter-box {
-            text-align: center;
-            font-size: 14px;
-            color: #888;
-            margin-top: -10px;
-            margin-bottom: 20px;
         }
         .gallery {
             max-width: 1200px;
@@ -77,29 +72,25 @@
         <p>Natural • Candid • Everyday Moments</p>
     </header>
 
-    <div class="counter-box">
-        Views: <span id="page-counter">Loading...</span>
+    <div class="gallery">
+        <img src="https://jamiespages.com/nellyi/photos/swimsuit1.jpg" alt="Swimsuit Photo 1">
+        <img src="https://jamiespages.com/nellyi/photos/swimsuit2.jpg" alt="Swimsuit Photo 2">
+        <img src="https://jamiespages.com/nellyi/photos/swimsuit3.jpg" alt="Swimsuit Photo 3">
+        <img src="https://jamiespages.com/nellyi/photos/swimsuit4.jpg" alt="Swimsuit Photo 4">
+        <img src="https://jamiespages.com/nellyi/photos/swimsuit5.jpg" alt="Swimsuit Photo 5">
+        <img src="https://jamiespages.com/nellyi/photos/swimsuit6.jpg" alt="Swimsuit Photo 6">
+        <img src="https://jamiespages.com/nellyi/photos/swimsuit7.jpg" alt="Swimsuit Photo 7">
+        <img src="https://jamiespages.com/nellyi/photos/swimsuit8.jpg" alt="Swimsuit Photo 8">
+        <img src="https://jamiespages.com/nellyi/photos/swimsuit9.jpg" alt="Swimsuit Photo 9">
+        <img src="https://jamiespages.com/nellyi/photos/swimsuit10.jpg" alt="Swimsuit Photo 10">
+        <img src="https://jamiespages.com/nellyi/photos/swimsuit11.jpg" alt="Swimsuit Photo 11">
+        <img src="https://jamiespages.com/nellyi/photos/swimsuit12.jpg" alt="Swimsuit Photo 12">
+        <img src="https://jamiespages.com/nellyi/photos/swimsuit13.jpg" alt="Swimsuit Photo 13">
+        <img src="https://jamiespages.com/nellyi/photos/swimsuit14.jpg" alt="Swimsuit Photo 14">
     </div>
 
     <div class="back-link">
-        <a href="gallery.html">← Back to Portfolio</a>
-    </div>
-
-    <div class="gallery">
-        <img src="./photos/swimsuit1.jpg" alt="Swimsuit Photo 1">
-        <img src="./photos/swimsuit2.jpg" alt="Swimsuit Photo 2">
-        <img src="./photos/swimsuit3.jpg" alt="Swimsuit Photo 3">
-        <img src="./photos/swimsuit4.jpg" alt="Swimsuit Photo 4">
-        <img src="./photos/swimsuit5.jpg" alt="Swimsuit Photo 5">
-        <img src="./photos/swimsuit6.jpg" alt="Swimsuit Photo 6">
-        <img src="./photos/swimsuit7.jpg" alt="Swimsuit Photo 7">
-        <img src="./photos/swimsuit8.jpg" alt="Swimsuit Photo 8">
-        <img src="./photos/swimsuit9.jpg" alt="Swimsuit Photo 9">
-        <img src="./photos/swimsuit10.jpg" alt="Swimsuit Photo 10">
-        <img src="./photos/swimsuit11.jpg" alt="Swimsuit Photo 11">
-        <img src="./photos/swimsuit12.jpg" alt="Swimsuit Photo 12">
-        <img src="./photos/swimsuit13.jpg" alt="Swimsuit Photo 13">
-        <img src="./photos/swimsuit14.jpg" alt="Swimsuit Photo 14">
+        <a href="https://jamiespages.com/nellyi/gallery.html">← Back to Portfolio</a>
     </div>
 
     <footer>
@@ -107,24 +98,39 @@
     </footer>
 
     <script>
-    async function loadCounter() {
-        // Automatically detect page filename for the database key
+    async function loadFooterAndCounter() {
+        // 1. Fetch and inject the central footer HTML
+        try {
+            const response = await fetch('https://jamiespages.com/nellyi/footer.html');
+            const html = await response.text();
+            document.getElementById('universal-footer').innerHTML = html;
+        } catch (err) {
+            console.error('Failed to load footer base structure', err);
+        }
+
+        // 2. Automatically detect page filename for the database key
         const pageId = window.location.pathname.split("/").pop().replace(".html", "") || "index";
 
+        // 3. Request the live count from your Java backend and inject it if element exists in footer
         try {
-            // Replace with your actual deployed Java backend URL
-            const response = await fetch(`https://your-java-server-domain.com/api/counter?pageId=${pageId}`, {
+            const counterResponse = await fetch(`https://your-java-server-domain.com/api/counter?pageId=${pageId}`, {
                 method: 'POST'
             });
-            const data = await response.json();
-            document.getElementById('page-counter').textContent = data.count;
+            const data = await counterResponse.json();
+            const counterEl = document.getElementById('page-counter');
+            if (counterEl) {
+                counterEl.textContent = data.count;
+            }
         } catch (err) {
             console.error('Failed to load live view count from Java backend', err);
-            document.getElementById('page-counter').textContent = '--';
+            const counterEl = document.getElementById('page-counter');
+            if (counterEl) {
+                counterEl.textContent = '--';
+            }
         }
     }
 
-    loadCounter();
+    loadFooterAndCounter();
     </script>
 
 </body>
