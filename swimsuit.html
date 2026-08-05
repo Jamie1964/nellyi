@@ -1,110 +1,137 @@
+<!-- DOMAIN: nellyi.com -->
 <!-- FILENAME: swimsuit.html -->
+<!-- UPDATED: 2026-08-05 12:07 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Swimsuit — Nelly Ihsayabok</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-    body { margin:0; background:#0d0d0d; color:#fff; font-family:Arial, sans-serif; }
-
-    header { text-align:center; padding:40px 20px; }
-    header h1 { font-size:42px; letter-spacing:3px; text-shadow:0 0 12px rgba(255,215,0,0.6); }
-    header p { font-size:18px; color:#ccc; margin-top:10px; }
-
-    .gallery {
-        max-width:1200px; margin:40px auto; padding:0 20px;
-        display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-        gap:25px;
-    }
-
-    .gallery img {
-        width:100%; border-radius:10px; object-fit:cover;
-        transition:0.3s ease;
-    }
-    .gallery img:hover { transform:scale(1.03); box-shadow:0 0 20px rgba(255,215,0,0.4); }
-
-    .back-link { text-align:center; margin:50px 0; }
-    .back-link a { color:#ffd700; font-size:20px; text-decoration:none; letter-spacing:1px; }
-
-    footer { text-align:center; padding:20px; color:#666; font-size:14px; margin-top:40px; }
-</style>
+    <meta charset="UTF-8">
+    <title>Swimsuit — Nelly Ihsayabok</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            background: #0d0d0d;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        header h1 {
+            font-size: 42px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+        }
+        header p {
+            font-size: 18px;
+            color: #ccc;
+            margin-top: 10px;
+        }
+        .gallery {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .gallery img {
+            width: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+            transition: 0.3s ease;
+        }
+        .gallery img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+        }
+        .back-link {
+            text-align: center;
+            margin: 50px 0;
+        }
+        .back-link a {
+            color: #ffd700;
+            font-size: 20px;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-    <h1>Swimsuit</h1>
-    <p>Natural • Candid • Everyday Moments</p>
-</header>
+    <header>
+        <h1>Swimsuit</h1>
+        <p>Natural • Candid • Everyday Moments</p>
+    </header>
 
+    <div class="gallery">
+        <img src="photos/swimsuit1.jpg" alt="Swimsuit Photo 1">
+        <img src="photos/swimsuit2.jpg" alt="Swimsuit Photo 2">
+        <img src="photos/swimsuit3.jpg" alt="Swimsuit Photo 3">
+        <img src="photos/swimsuit4.jpg" alt="Swimsuit Photo 4">
+        <img src="photos/swimsuit5.jpg" alt="Swimsuit Photo 5">
+        <img src="photos/swimsuit6.jpg" alt="Swimsuit Photo 6">
+        <img src="photos/swimsuit7.jpg" alt="Swimsuit Photo 7">
+        <img src="photos/swimsuit8.jpg" alt="Swimsuit Photo 8">
+        <img src="photos/swimsuit9.jpg" alt="Swimsuit Photo 9">
+        <img src="photos/swimsuit10.jpg" alt="Swimsuit Photo 10">
+        <img src="photos/swimsuit11.jpg" alt="Swimsuit Photo 11">
+        <img src="photos/swimsuit12.jpg" alt="Swimsuit Photo 12">
+        <img src="photos/swimsuit13.jpg" alt="Swimsuit Photo 13">
+        <img src="photos/swimsuit14.jpg" alt="Swimsuit Photo 14">
+    </div>
 
-<div class="back-link">
-    <a href="gallery.html">← Back to Portfolio</a>
-</div>
+    <div class="back-link">
+        <a href="gallery.html">← Back to Portfolio</a>
+    </div>
 
-    
-<div class="gallery">
-    <img src="./photos/swimsuit1.jpg">
-    <img src="./photos/swimsuit2.jpg">
-    <img src="./photos/swimsuit3.jpg">
-    <img src="./photos/swimsuit4.jpg">
-    <img src="./photos/swimsuit5.jpg">
-    <img src="./photos/swimsuit6.jpg">
-    <img src="./photos/swimsuit7.jpg">
-    <img src="./photos/swimsuit8.jpg">
-    <img src="./photos/swimsuit9.jpg">
-    <img src="./photos/swimsuit10.jpg">
-    <img src="./photos/swimsuit11.jpg">
-    <img src="./photos/swimsuit12.jpg">
-    <img src="./photos/swimsuit13.jpg">
-    <img src="./photos/swimsuit14.jpg">
+    <footer>
+        <div id="universal-footer"></div>
+    </footer>
 
+    <script>
+    async function loadFooterAndCounter() {
+        // 1. Fetch and inject the central footer HTML
+        try {
+            const response = await fetch('/footer.html');
+            const html = await response.text();
+            document.getElementById('universal-footer').innerHTML = html;
+        } catch (err) {
+            console.error('Failed to load footer base structure', err);
+        }
 
+        // 2. Automatically detect page filename for the database key
+        const pageId = window.location.pathname.split("/").pop().replace(".html", "") || "index";
 
-    
-
-</div>
-
-
-<div class="back-link">
-    <a href="gallery.html">← Back to Portfolio</a>
-</div>
-
-<!-- The container where your footer will load -->
-<div id="universal-footer"></div>
-
-<script>
-  async function loadFooterAndCounter() {
-    // 1. Fetch and inject the central footer HTML
-    try {
-      const response = await fetch('/footer.html');
-      const html = await response.text();
-      document.getElementById('universal-footer').innerHTML = html;
-    } catch (err) {
-      console.error('Failed to load footer base structure', err);
-      return; // Stop if footer file can't be loaded
+        // 3. Request the live count from your Java backend and inject it if element exists in footer
+        try {
+            const counterResponse = await fetch(`https://your-java-server-domain.com/api/counter?pageId=${pageId}`, {
+                method: 'POST'
+            });
+            const data = await counterResponse.json();
+            const counterEl = document.getElementById('page-counter');
+            if (counterEl) {
+                counterEl.textContent = data.count;
+            }
+        } catch (err) {
+            console.error('Failed to load live view count from Java backend', err);
+            const counterEl = document.getElementById('page-counter');
+            if (counterEl) {
+                counterEl.textContent = '--';
+            }
+        }
     }
 
-    // 2. Automatically detect page filename (e.g., 'beauty', 'fashion') for the database key
-    const pageId = window.location.pathname.split("/").pop().replace(".html", "") || "index";
-    
-    // 3. Request the live count from your worker and inject it into the loaded footer template
-    try {
-      const counterResponse = await fetch(`https://cold-boat-0687.jimkoskinas.workers.dev/?pageId=${pageId}`, {
-        method: 'POST'
-      });
-      const data = await counterResponse.json();
-      document.getElementById('page-counter').textContent = data.count;
-    } catch (err) {
-      console.error('Failed to load live view count', err);
-      document.getElementById('page-counter').textContent = '--';
-    }
-  }
+    loadFooterAndCounter();
+    </script>
 
-  // Run everything on page load
-  loadFooterAndCounter();
-</script>
 </body>
 </html>
