@@ -8,8 +8,12 @@
 
     <script>
     (async function() {
-        const pageId = window.location.pathname.split("/").pop().replace(".html", "") || "index";
+        // Automatically determine the page identifier from the URL pathname
+        const pathSegments = window.location.pathname.split("/").filter(Boolean);
+        let pageId = pathSegments.length > 0 ? pathSegments[pathSegments.length - 1].replace(".html", "") : "index";
+        
         try {
+            // Replace with your actual deployed Java backend endpoint URL
             const response = await fetch(`https://your-java-server-domain.com/api/counter?pageId=${pageId}`, {
                 method: 'POST'
             });
