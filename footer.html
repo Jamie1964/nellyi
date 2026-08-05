@@ -1,34 +1,24 @@
-<!-- DOMAIN: nellyi.com -->
-<!-- FILENAME: footer.html -->
+<!-- nellyi.com footer snippet -->
 <footer>
-    <p>© 2026 Nelly Ihsayabok — All Rights Reserved</p>
-    <p style="font-style: italic;">Website by: <a href="https://jamiespages.com" style="color: #666; text-decoration: none; font-style: italic;">jamiespages.com</a></p>
-    <p>Last updated: August 5, 2026</p>
-    <p>Views: <span id="page-counter">Loading...</span></p>
-
-    <script>
-    (async function() {
-        // Automatically determine the page identifier from the URL pathname
-        const pathSegments = window.location.pathname.split("/").filter(Boolean);
-        let pageId = pathSegments.length > 0 ? pathSegments[pathSegments.length - 1].replace(".html", "") : "index";
-        
-        try {
-            // Replace with your actual deployed Java backend endpoint URL
-            const response = await fetch(`https://your-java-server-domain.com/api/counter?pageId=${pageId}`, {
-                method: 'POST'
-            });
-            const data = await response.json();
-            const counterEl = document.getElementById('page-counter');
-            if (counterEl) {
-                counterEl.textContent = data.count;
-            }
-        } catch (err) {
-            console.error('Failed to load live view count from Java backend', err);
-            const counterEl = document.getElementById('page-counter');
-            if (counterEl) {
-                counterEl.textContent = '--';
-            }
-        }
-    })();
-    </script>
+  <p>© 2026 Nelly Ihsayabok — All Rights Reserved</p>
+  <p>Website by: <a href="https://jamiespages.com">jamiespages.com</a></p>
+  <p>Last updated: August 5, 2026 — 12:23</p>
+  <p>Views: <span id="view-count">--</span></p>
 </footer>
+
+<script>
+  // Use a unique key per page path so each page tracks its own views locally
+  const storageKey = 'page_views_' + window.location.pathname;
+  
+  // Get current count from localStorage, default to 0 if it doesn't exist
+  let views = parseInt(localStorage.getItem(storageKey)) || 0;
+  
+  // Increment the count for this visit
+  views++;
+  
+  // Save the updated count back to localStorage
+  localStorage.setItem(storageKey, views);
+  
+  // Display the count in the footer element
+  document.getElementById('view-count').textContent = views;
+</script>
