@@ -2,30 +2,26 @@
   <p>© 2026 Nelly Ihsayabok — All Rights Reserved</p>
   <p>Website by: <a href="https://jamiespages.com">jamiespages.com</a></p>
   <p>Last updated: August 5, 2026 — 12:23</p>
-  <p>Views: <span id="view-count">--</span></p>
+  <p>Views: <span id="view-count">1</span></p>
 </footer>
 
 <script>
-  // Clean, automated public counter API that requires no backend setup
-  async function updateGlobalCounter() {
+  (async function() {
     try {
-      // Use a unique namespace/key for your site
-      const namespace = 'nellyi-com';
-      const key = encodeURIComponent(window.location.pathname);
+      // Clean identifier based on the page name
+      const pageId = 'nellyi_' + window.location.pathname.replace(/[^a-zA-Z0-9]/g, '_');
       
-      // Hits the free API to increment and fetch the count simultaneously
-      const response = await fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`);
-      if (response.ok) {
-        const data = await response.json();
-        const countEl = document.getElementById('view-count');
-        if (countEl) {
-          countEl.textContent = data.count;
+      // Using a reliable public JSON counter endpoint
+      const res = await fetch(`https://api.counterapi.dev/v1/nellyi/pages_${pageId}/up`);
+      if (res.ok) {
+        const data = await res.json();
+        const el = document.getElementById('view-count');
+        if (el && data.count) {
+          el.textContent = data.count;
         }
       }
-    } catch (err) {
-      console.error('Failed to load view count', err);
+    } catch (e) {
+      console.error('Counter error:', e);
     }
-  }
-
-  updateGlobalCounter();
+  })();
 </script>
