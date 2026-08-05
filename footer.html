@@ -1,3 +1,5 @@
+<!-- DOMAIN: nellyi.com -->
+<!-- FILENAME: footer.html -->
 <footer>
     <p>© 2026 Nelly Ihsayabok — All Rights Reserved</p>
     <p style="font-style: italic;">Website by: <a href="https://jamiespages.com" style="color: #666; text-decoration: none; font-style: italic;">jamiespages.com</a></p>
@@ -5,7 +7,7 @@
     <p>Views: <span id="page-counter">Loading...</span></p>
 
     <script>
-    async function fetchJavaCounter() {
+    (async function() {
         const pageId = window.location.pathname.split("/").pop().replace(".html", "") || "index";
         try {
             const response = await fetch(`https://your-java-server-domain.com/api/counter?pageId=${pageId}`, {
@@ -23,7 +25,6 @@
                 counterEl.textContent = '--';
             }
         }
-    }
-    fetchJavaCounter();
+    })();
     </script>
 </footer>
