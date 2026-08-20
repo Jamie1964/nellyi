@@ -93,47 +93,6 @@
         <a href="gallery.html">← Back to Portfolio</a>
     </div>
 
-    <footer>
-        <div id="universal-footer"></div>
-    </footer>
-
-    <script>
-    async function loadFooterAndCounter() {
-        // 1. Fetch and inject the central footer HTML
-        try {
-            const response = await fetch('/footer.html');
-            const html = await response.text();
-            document.getElementById('universal-footer').innerHTML = html;
-        } catch (err) {
-            console.error('Failed to load footer base structure', err);
-        }
-
-        // 2. Automatically detect page filename for the database key
-        const pageId = window.location.pathname.split("/").pop().replace(".html", "") || "index";
-
-        // 3. Request the live count from your Java backend and inject it if element exists in footer
-        try {
-            const counterResponse = await fetch(`https://your-java-server-domain.com/api/counter?pageId=${pageId}`, {
-                method: 'POST'
-            });
-            const data = await counterResponse.json();
-            const counterEl = document.getElementById('page-counter');
-            if (counterEl) {
-                counterEl.textContent = data.count;
-            }
-        } catch (err) {
-            console.error('Failed to load live view count from Java backend', err);
-            const counterEl = document.getElementById('page-counter');
-            if (counterEl) {
-                counterEl.textContent = '--';
-            }
-        }
-    }
-
-    loadFooterAndCounter();
-    </script>
-
-
 
 <div id="footer"></div>
 
