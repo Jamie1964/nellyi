@@ -161,42 +161,45 @@
         <a href="mailto:nelly@nellyi.com" style="color:#ffd700;">nelly@nellyi.com</a>
     </p>
 </div>
+<br> <br>
+<!-- The counter -->
+<script>
+  // Create a unique key based on BOTH domain + page
+  const domain = window.location.hostname.replace(/\./g, "_");
+  const page = window.location.pathname.replace(/\//g, "_") || "home";
+  const counterKey = "pv_" + domain + "_" + page;
+
+  let views = localStorage.getItem(counterKey);
+
+  if (!views) {
+    views = 1;
+  } else {
+    views = parseInt(views) + 1;
+  }
+
+  localStorage.setItem(counterKey, views);
+
+  document.getElementById("viewCounter").innerText = "Views: " + views;
+</script>
+
+<div id="footer"></div>
 
 <footer>
 <!-- The container where your footer will load -->
-<div id="universal-footer"></div>
 
-<script>
-  async function loadFooterAndCounter() {
-    // 1. Fetch and inject the central footer HTML
-    try {
-      const response = await fetch('/footer.html');
-      const html = await response.text();
-      document.getElementById('universal-footer').innerHTML = html;
-    } catch (err) {
-      console.error('Failed to load footer base structure', err);
-      return; // Stop if footer file can't be loaded
-    }
-
-    // 2. Automatically detect page filename (e.g., 'beauty', 'fashion') for the database key
-    const pageId = window.location.pathname.split("/").pop().replace(".html", "") || "index";
     
-    // 3. Request the live count from your worker and inject it into the loaded footer template
-    try {
-      const counterResponse = await fetch(`https://cold-boat-0687.jimkoskinas.workers.dev/?pageId=${pageId}`, {
-        method: 'POST'
-      });
-      const data = await counterResponse.json();
-      document.getElementById('page-counter').textContent = data.count;
-    } catch (err) {
-      console.error('Failed to load live view count', err);
-      document.getElementById('page-counter').textContent = '--';
-    }
-  }
-
-  // Run everything on page load
-  loadFooterAndCounter();
+<script>
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer').innerHTML = data;
+    })
+    .catch(error => {
+      console.error('Footer failed to load:', error);
+    });
 </script>
 
+
+    
 </body>
 </html>
