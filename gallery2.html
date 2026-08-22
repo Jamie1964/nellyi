@@ -1,1 +1,178 @@
 
+<!-- FILENAME: gallery.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nelly Ihsayabok — Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        margin:0;
+        background:#0d0d0d;
+        color:#fff;
+        font-family:Arial, sans-serif;
+    }
+
+    header {
+        text-align:center;
+        padding:40px 20px;
+    }
+
+    header h1 {
+        font-size:42px;
+        letter-spacing:3px;
+        text-shadow:0 0 12px rgba(255,215,0,0.6);
+    }
+
+    header p {
+        font-size:18px;
+        color:#ccc;
+        margin-top:10px;
+    }
+
+    /* Gallery Grid */
+    .gallery {
+        max-width:1200px;
+        margin:40px auto;
+        padding:0 20px;
+        display:grid;
+        grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+        gap:25px;
+    }
+
+    .gallery-item {
+        text-align:center;
+    }
+
+    .gallery-link {
+        display:block;
+        font-size:22px;
+        font-weight:600;
+        margin-bottom:10px;
+        color:#fff;
+        text-decoration:none;
+    }
+
+    .gallery-link:hover {
+        color:#ff66cc;
+    }
+
+    .gallery-photo {
+        width:100%;
+        height:auto;
+        border-radius:10px;
+        object-fit:cover;
+        transition:0.3s ease;
+    }
+
+    .gallery-photo:hover {
+        transform:scale(1.03);
+        box-shadow:0 0 20px rgba(255,215,0,0.4);
+    }
+
+    /* Back Link */
+    .back-link {
+        text-align:center;
+        margin:50px 0;
+    }
+
+    .back-link a {
+        color:#ffd700;
+        font-size:20px;
+        text-decoration:none;
+        letter-spacing:1px;
+    }
+
+    footer {
+        text-align:center;
+        padding:20px;
+        color:#666;
+        font-size:14px;
+        margin-top:40px;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Portfolio</h1>
+    <p>Fashion • Beauty • Editorial • Lifestyle</p>
+</header>
+
+<!-- GALLERY GRID (FIXED WRAPPER) -->
+<div class="gallery">
+
+    <div class="gallery-item">
+        <a href="fashion.html" class="gallery-link">Fashion</a>
+        <a href="fashion.html">
+            <img src="./photos/fashion-cover.jpg" alt="Fashion Cover" class="gallery-photo">
+        </a>
+    </div>
+
+    <div class="gallery-item">
+        <a href="glam.html" class="gallery-link">Glam</a>
+        <a href="glam.html">
+            <img src="./photos/glam-cover.jpg" alt="Glam Cover" class="gallery-photo">
+        </a>
+    </div>
+
+    <div class="gallery-item">
+        <a href="beauty.html" class="gallery-link">Beauty</a>
+        <a href="beauty.html">
+            <img src="./photos/beauty-cover.jpg" alt="Beauty Cover" class="gallery-photo">
+        </a>
+    </div>
+
+    <div class="gallery-item">
+        <a href="lifestyle.html" class="gallery-link">Lifestyle</a>
+        <a href="lifestyle.html">
+            <img src="./photos/lifestyle-cover.jpg" alt="Lifestyle Cover" class="gallery-photo">
+        </a>
+    </div>
+
+</div>
+
+<div class="back-link">
+    <a href="index.html">← Back to Home</a>
+</div>
+
+<!-- The container where your footer will load -->
+<div id="universal-footer"></div>
+
+<div id="footer"></div>
+
+<script>
+  fetch('footer.html')
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById('footer').innerHTML = html;
+
+      // NOW the footer exists — safe to run the counter
+      const domain = window.location.hostname.replace(/\./g, "_");
+      const page = window.location.pathname.replace(/\//g, "_") || "home";
+      const counterKey = "pv_" + domain + "_" + page;
+
+      let views = localStorage.getItem(counterKey);
+      views = views ? parseInt(views) + 1 : 1;
+      localStorage.setItem(counterKey, views);
+
+      document.getElementById("viewCounter").innerText = "Views: " + views;
+    })
+    .catch(err => console.error("Footer failed to load:", err));
+</script>
+
+
+
+
+
+
+
+
+
+
+    
+</body>
+</html>
